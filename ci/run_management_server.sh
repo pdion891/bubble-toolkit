@@ -13,4 +13,9 @@ mysql -u cloud -pcloud cloud --exec "UPDATE cloud.vm_template SET unique_name='t
 mysql -u cloud -pcloud cloud --exec "UPDATE cloud.vm_template SET unique_name='tiny Linux Xen',name='tiny Linux',url='http://artifacts.schubergphilis.com/artifacts/cloudstack/tiny_vhd/ce5b212e-215a-3461-94fb-814a635b2215.vhd',checksum='046e134e642e6d344b34648223ba4bc1', \
     display_text='tiny Linux Xen', format='VHD', hypervisor_type='XernServer'  where id=5;"
 
+# KVM  bridges
+mysql -u cloud -pcloud cloud --exec "INSERT INTO cloud.configuration (instance, name, value) VALUE('DEFAULT', 'kvm.private.network.device', 'cloudbr0') ON DUPLICATE KEY UPDATE value = 'cloudbr0';"
+mysql -u cloud -pcloud cloud --exec "INSERT INTO cloud.configuration (instance, name, value) VALUE('DEFAULT', 'kvm.public.network.device', 'pub0') ON DUPLICATE KEY UPDATE value = 'pub0';"
+mysql -u cloud -pcloud cloud --exec "INSERT INTO cloud.configuration (instance, name, value) VALUE('DEFAULT', 'kvm.guest.network.device', 'cloudbr0') ON DUPLICATE KEY UPDATE value = 'cloudbr0';"
+
 MAVEN_OPTS="-Xmx2G" mvn -Dsimulator -pl :cloud-client-ui jetty:run -Djava.net.preferIPv4Stack=true

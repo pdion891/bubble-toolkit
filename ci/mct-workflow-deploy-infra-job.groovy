@@ -115,7 +115,10 @@ def deployDb() {
     'UPDATE cloud.vm_template SET url=\'http://dl.openvm.eu/cloudstack/macchinina/x86_64/macchinina-xen.vhd.bz2\', guest_os_id=140, name=\'tiny linux xenserver\', display_text=\'tiny linux xenserver\', hvm=1 where id=2;',
     'UPDATE cloud.vm_template SET url=\'http://dl.openvm.eu/cloudstack/macchinina/x86_64/macchinina-xen.vhd.bz2\', guest_os_id=140, name=\'tiny linux xenserver\', display_text=\'tiny linux xenserver\', hvm=1 where id=5;',
     'UPDATE service_offering SET ha_enabled = 1;',
-    'UPDATE vm_instance SET ha_enabled = 1;'
+    'UPDATE vm_instance SET ha_enabled = 1;',
+    'INSERT INTO cloud.configuration (instance, name, value) VALUE(\'DEFAULT\', \'kvm.private.network.device\', \'cloudbr0\') ON DUPLICATE KEY UPDATE value = \'cloudbr0\';',
+    'INSERT INTO cloud.configuration (instance, name, value) VALUE(\'DEFAULT\', \'kvm.public.network.device\', \'pub0\') ON DUPLICATE KEY UPDATE value = \'pub0\';',
+    'INSERT INTO cloud.configuration (instance, name, value) VALUE(\'DEFAULT\', \'kvm.guest.network.device\', \'cloudbr0\') ON DUPLICATE KEY UPDATE value = \'cloudbr0\';'
   ]
   writeFile file: 'extraDbConfig.sql', text: extraDbConfig.join('\n')
   mysqlScript('cs1', 'cloud', 'cloud', 'cloud', 'extraDbConfig.sql')
