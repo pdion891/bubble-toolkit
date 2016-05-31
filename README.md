@@ -36,7 +36,7 @@ This will build the hypervisors:
 
 ```
 ssh cs1
-cd /data/shared/helper_script/cloudstack
+cd /data/shared/helper_scripts/cloudstack
  ./check-pr.sh -m /data/shared/marvin/mct-zone1-kvm1-kvm2.cfg -p PRNR -b BASE_BRANCH -t
 ```
 Example:
