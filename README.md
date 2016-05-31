@@ -49,7 +49,7 @@ If you don't specify a test file with the `-f` flag, it will automatically defau
 ```
  ./check-pr.sh -m /data/shared/marvin/mct-zone1-kvm1-kvm2.cfg -p 1348 -b 4.8 -t -f run_marvin_router_tests.sh
 ```
-This will run the tests defined in the `/data/share/helper_scripts/cloudstack/run_marvin_router_tests.sh` file.
+This will run the tests defined in the `/data/shared/helper_scripts/cloudstack/run_marvin_router_tests.sh` file.
 
 ### Results of a test:
 
